@@ -33,7 +33,7 @@ public class Authority implements GrantedAuthority {
 	}
 
 	public String getAuthority() {
-		return authority;
+		return this.authority;
 	}
 
 	public void setAuthority(String authority) {
