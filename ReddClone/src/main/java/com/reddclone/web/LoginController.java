@@ -1,14 +1,19 @@
  package com.reddclone.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.reddclone.domain.User;
+import com.reddclone.service.UserService;
 
 @Controller
 public class LoginController {
+	
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping("/login")
 	public String login() {
@@ -23,7 +28,8 @@ public class LoginController {
 	
 	@PostMapping("/register")
 	public String registerPost(User user) {
-		System.out.println(user);
-		return "redirect:/register";
+		User savedUser = userService.save(user);
+		
+		return "redirect:/login";
 	}
 }
