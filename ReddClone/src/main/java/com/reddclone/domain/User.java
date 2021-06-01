@@ -31,6 +31,9 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
 	private Set<Authority> authorities = new HashSet<>();
 
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "user")
+	private Set<Product> products = new HashSet<>();
+	
 	public Set<Authority> getAuthorities() {
 		return authorities;
 	}
@@ -57,6 +60,14 @@ public class User {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public Set<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
 	}
 
 	public void setPassword(String password) {
