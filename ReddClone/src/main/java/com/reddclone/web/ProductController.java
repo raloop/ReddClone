@@ -1,7 +1,6 @@
 package com.reddclone.web;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -25,11 +24,12 @@ public class ProductController {
 	
 	@Autowired
 	private ProductRepository productRepo;
-
+	
 	
 	@GetMapping("/products/{productId}")
 	public String getProduct(@PathVariable Long productId, ModelMap model, HttpServletResponse response) throws IOException {
-		Optional<Product> productOpt = productRepo.findById(productId);
+		Optional<Product> productOpt = productRepo.findByIdWithUser(productId);
+		
 		if (productOpt.isPresent()) {
 			Product product = productOpt.get();
 			model.put("product", product);

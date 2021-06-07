@@ -68,4 +68,11 @@ public class Product {
 		this.published = published;
 	}
 
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", name=" + name + ", user=" + user + ", features=" + features + ", published="
+				+ published + "]";
+	}
+	
+	
 }
