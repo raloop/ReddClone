@@ -40,8 +40,17 @@ public class ProductController {
 			response.sendError(HttpStatus.NOT_FOUND.value(), "Product with id " + productId + " was not found");
 			return "product";
 		}
-	
+		
 		return "product";
+	}
+	
+	@PostMapping("/products/{productId}")
+	public String saveProduct(@PathVariable Long productId, Product product) {
+		System.out.println(product);
+		
+		product = productRepo.save(product);
+		
+		return "redirect:/products/"+product.getId();
 	}
 	
 	@PostMapping("/products")
