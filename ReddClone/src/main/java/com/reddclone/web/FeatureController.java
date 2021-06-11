@@ -1,7 +1,11 @@
 package com.reddclone.web;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,6 +21,8 @@ import com.reddclone.service.FeatureService;
 @Controller
 @RequestMapping("/products/{productId}/features")
 public class FeatureController {
+	
+	Logger log = LoggerFactory.getLogger(FeatureController.class);
 	
 	@Autowired
 	private FeatureService featureService;
@@ -41,6 +47,13 @@ public class FeatureController {
 	@PostMapping("/{featureId}")
 	public String updateFeature(Feature feature, @PathVariable Long productId, @PathVariable Long featureId) {
 		feature = featureService.save(feature);
-		return "redirect:/products/"+productId+"/features/"+feature.getId();
+		String encodedProductName;
+		try {
+			encodedProductName = URLEncoder.encode(feature.getProduct().getName(), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			log.warn("Unable to encode the URL string: " + feature.getProduct().getName() + ", redirecting to dashboard");
+			return "redirect:/dashboard";
+		}
+		return "redirect:/p/"+encodedProductName;
 	}
 }
