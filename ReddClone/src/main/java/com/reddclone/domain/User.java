@@ -34,6 +34,9 @@ public class User {
 	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<Product> products = new HashSet<>();
 	
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "user")
+	private Set<Feature> features = new HashSet<>();
+	
 	public Set<Authority> getAuthorities() {
 		return authorities;
 	}
@@ -80,6 +83,14 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Set<Feature> getFeatures() {
+		return features;
+	}
+
+	public void setFeatures(Set<Feature> features) {
+		this.features = features;
 	}
 
 	@Override

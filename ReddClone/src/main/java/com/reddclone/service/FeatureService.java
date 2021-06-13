@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.reddclone.domain.Feature;
 import com.reddclone.domain.Product;
+import com.reddclone.domain.User;
 import com.reddclone.repositories.FeatureRepository;
 import com.reddclone.repositories.ProductRepository;
 
@@ -19,7 +20,7 @@ public class FeatureService {
 	@Autowired
 	private ProductRepository productRepo;
 	
-	public Feature createFeature(Long productId) {
+	public Feature createFeature(Long productId, User user) {
 		Feature feature = new Feature();
 		
 		Optional<Product> productOpt = productRepo.findById(productId);
@@ -29,6 +30,9 @@ public class FeatureService {
 			
 			feature.setProduct(product);
 			product.getFeatures().add(feature);
+			
+			feature.setUser(user);
+			user.getFeatures().add(feature);
 			
 			feature.setStatus("Pending review");
 			
