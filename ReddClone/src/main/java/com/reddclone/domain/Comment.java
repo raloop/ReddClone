@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Comment {
 
@@ -24,9 +26,11 @@ public class Comment {
 	private String text;
 
 	@ManyToOne
+	@JsonIgnore
 	private User user;
 
 	@ManyToOne
+	@JsonIgnore
 	private Feature feature;
 
 	@OneToMany(mappedBy = "comment")
@@ -34,6 +38,7 @@ public class Comment {
 
 	@ManyToOne
 	@JoinColumn(name = "comment_id", nullable = true)
+	@JsonIgnore
 	private Comment comment;
 
 	private Date createdDate;
