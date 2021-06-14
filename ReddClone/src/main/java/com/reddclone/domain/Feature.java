@@ -28,7 +28,7 @@ public class Feature {
 	@ManyToOne
 	private User user;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "pk.feature")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "feature")
 	private Set<Comment> comments = new HashSet<>();
 
 	public Long getId() {
