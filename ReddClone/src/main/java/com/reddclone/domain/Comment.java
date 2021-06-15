@@ -3,6 +3,8 @@ package com.reddclone.domain;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +39,7 @@ public class Comment implements Comparable<Comment> {
 	private Feature feature;
 
 	@OneToMany(mappedBy = "comment")
-	private List<Comment> comments = new ArrayList<>(); // leave comments to a comment (sort of reply to a comment)
+	private Set<Comment> comments = new TreeSet<>(); // leave comments to a comment (sort of reply to a comment)
 
 	@ManyToOne
 	@JoinColumn(name = "comment_id", nullable = true)
@@ -78,11 +80,11 @@ public class Comment implements Comparable<Comment> {
 		this.feature = feature;
 	}
 
-	public List<Comment> getComments() {
+	public Set<Comment> getComments() {
 		return comments;
 	}
 
-	public void setComments(List<Comment> comments) {
+	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
 	}
 
