@@ -2,7 +2,6 @@ package com.reddclone.web;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Optional;
@@ -49,7 +48,7 @@ public class FeatureController {
 			Feature feature = featureOpt.get();
 			model.put("feature", feature);
 			SortedSet<Comment> commentsWithoutDuplicates = getCommentsWithoutDuplicates(0, new HashSet<Long>(), feature.getComments());
-			model.put("comments", commentsWithoutDuplicates);
+			model.put("thread", commentsWithoutDuplicates);
 		}
 		model.put("user", user);
 		
