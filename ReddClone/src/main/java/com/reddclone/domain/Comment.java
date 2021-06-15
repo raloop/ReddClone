@@ -1,9 +1,7 @@
 package com.reddclone.domain;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeSet;
 
 import javax.persistence.Column;
@@ -14,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -39,7 +38,8 @@ public class Comment implements Comparable<Comment> {
 	private Feature feature;
 
 	@OneToMany(mappedBy = "comment")
-	private Set<Comment> comments = new TreeSet<>(); // leave comments to a comment (sort of reply to a comment)
+	@OrderBy("createdDate, id")
+	private SortedSet<Comment> comments = new TreeSet<>(); // leave comments to a comment (sort of reply to a comment)
 
 	@ManyToOne
 	@JoinColumn(name = "comment_id", nullable = true)
@@ -80,11 +80,11 @@ public class Comment implements Comparable<Comment> {
 		this.feature = feature;
 	}
 
-	public Set<Comment> getComments() {
+	public SortedSet<Comment> getComments() {
 		return comments;
 	}
 
-	public void setComments(Set<Comment> comments) {
+	public void setComments(SortedSet<Comment> comments) {
 		this.comments = comments;
 	}
 

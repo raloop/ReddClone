@@ -56,8 +56,11 @@
 				<div th:each="commentLevel1 : ${comment.comments}" class="ml-3">
 					<span th:text="${commentLevel1.text}"></span>
 					<div th:each="commentLevel2 : ${commentLevel1.comments}" class="ml-3">
-					<span th:text="${commentLevel2.text}"></span>
-				</div>
+						<span th:text="${commentLevel2.text}"></span>
+						<div th:each="commentLevel3 : ${commentLevel2.comments}" class="ml-3">
+							<span th:text="${commentLevel3.text}"></span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
