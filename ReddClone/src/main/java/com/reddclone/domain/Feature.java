@@ -1,7 +1,7 @@
 package com.reddclone.domain;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -33,7 +33,7 @@ public class Feature {
 	private User user;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "feature")
-	private Set<Comment> comments = new HashSet<>();
+	private Set<Comment> comments = new TreeSet<>();
 
 	public Long getId() {
 		return id;

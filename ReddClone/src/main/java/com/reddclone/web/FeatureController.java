@@ -3,6 +3,7 @@ package com.reddclone.web;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Optional;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.reddclone.domain.Comment;
 import com.reddclone.domain.Feature;
 import com.reddclone.domain.User;
 import com.reddclone.service.FeatureService;
@@ -42,12 +44,22 @@ public class FeatureController {
 		if (featureOpt.isPresent()) {
 			Feature feature = featureOpt.get();
 			model.put("feature", feature);
-			model.put("comments", feature.getComments());
+			model.put("comments", getCommentsWithoutDuplicates(feature));
 		}
-		
 		model.put("user", user);
 		
 		return "feature";
+	}
+
+	/**
+	 * get comments without duplicates -- nested comments fixing solution
+	 * @param feature
+	 * @return
+	 */
+	private Set<Comment> getCommentsWithoutDuplicates(Feature feature) {
+		Set<Comment> comments = feature.getComments();
+		
+		return comments;
 	}
 	
 	@PostMapping("/{featureId}")
