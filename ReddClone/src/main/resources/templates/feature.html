@@ -52,7 +52,13 @@
 				</div>			
 			</form>
 			<div th:each="comment : ${comments}">
-				<span th:text="${comment.text}"></span>
+				<span th:if="${comment.comment == null}" th:text="${comment.text}"></span>
+				<div th:each="commentLevel1 : ${comment.comments}" class="ml-3">
+					<span th:text="${commentLevel1.text}"></span>
+					<div th:each="commentLevel2 : ${commentLevel1.comments}" class="ml-3">
+					<span th:text="${commentLevel2.text}"></span>
+				</div>
+				</div>
 			</div>
 		</div>
 
