@@ -4,6 +4,16 @@
 <meta charset="ISO-8859-1">
 <title>ReddClone Feature</title>
 <script th:replace="fragments/header :: headerElement"></script>
+<script type="text/javascript">
+	$(function () {
+		$("button[id*='replyBtn-']").click(function() {
+			let commentId = $(this).prop("id").split("-")[1]
+			let formId = "replyForm-" + commentId
+			
+			$("#"+formId).removeClass("d-none")
+		})
+	})
+</script>
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
@@ -51,9 +61,9 @@
 					<label for="text">Leave a comment below</label>
 					<textarea class="form-control" th:field="${comment.text}"
 						rows="3"></textarea>
-					<div class="mt-3">
-						<button type="submit" class="btn btn-primary">Add Comment</button>
-					</div>
+				</div>
+				<div class="mt-3">
+					<button type="submit" class="btn btn-primary">Add Comment</button>
 				</div>			
 			</form>
 			<hr/>
