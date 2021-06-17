@@ -8,8 +8,7 @@
 	$(function () {
     	$("button[id*='replyBtn-']").click(function () {
     	  $("form[id*='replyForm-']:not(.d-none)").each(function () {
-    		let commentId = $(this).prop("id").split("-")[1]
-    	    let formId = "replyForm-" + commentId
+    		let formId = $(this).prop("id")
     	    
     	    $("#"+formId).addClass("d-none")
     	  })
@@ -65,7 +64,7 @@
 				
 				<div class="form-group">
 					<label for="text">Leave a comment below</label>
-					<textarea class="form-control" th:field="${comment.text}"
+					<textarea class="form-control" th:field="${rootComment.text}"
 						rows="3"></textarea>
 				</div>
 				<div class="mt-3">
